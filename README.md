@@ -2,13 +2,13 @@
 
 This is an Openstack deployment based on Neutron (without any SDN solution) using kubernetes and docker containers. 
 
-Features:
+## Features:
 - Fast Openstack release upgrade: version is parameterized in Dockerfiles getting the code directly from upstream.
 - Configuration files are externalized to the k8s ETCD. No containers based on config-files. Just get it from Etcd !!
 - Kubernetes cluster is distributed automatically between all the hosts (using rancher to deploy it).
 - Openstack Service definition is developed in k8s to be scaled (only the first time launched should create the db scheme and tables in keystone), so you can modify the replica parameter to scale up.
 
-Openstack Services ready:
+## Openstack Services ready:
 - Keystone
 - Glance
 - Neutron
@@ -21,7 +21,7 @@ Openstack Services ready:
 - Nova-Compute
 
 Partially based on [Rancher](https://github.com/rancher) project: 
-- We use Rancher DNS service to simplify the kubernetes deployment. Instead of that, you can use skydns in k8s or whatever you want.
+- We use Rancher DNS service to simplify the kubernetes deployment. As an alternative, you can use skydns in k8s or whatever you want.
 - Rancher deploy automatically full kubernetes cluster distributed on all the hosts.
 - Rancher is just a tool to manage the Openstack deployment as well as other platforms based on containers.
 - Moreover, the kubernetes deployments files are used to generate Rancher catalogs in order to simplify the way to deploy it.
@@ -31,9 +31,13 @@ Partially based on [Rancher](https://github.com/rancher) project:
 
 The order needed to deploy the platform should be:
 
-1. Load de config loader in order to get all the environment and configuration params to the Etcd service
-   - Configure the [config-loader](https://github.com/BBVA/openstack-k8s/tree/master/config-loader/data/bootstrap/general) renaming the file (without -sample) and configuring the password variables for all the services.
-2. Deploy each service in the next sequence:
+1. Load the config loader in order to get all the environment and configuration params to the Etcd service
+   - Configure the [config-loader](https://github.com/BBVA/openstack-k8s/tree/master/config-loader/data/bootstrap/general) renaming the file (without -sample)
+   - Configuring the password variables for all the services in the same file to adapt to your environment.
+
+   In the following ETCD section you can get more information about the Etcd scheme.
+
+2. Deploy each service in the following sequence:
    - Mysql using the pxc-cluster
    - Rabbitmq cluster
    - Keystone (Must be the first openstack service to establish all the endpoint tables)
@@ -42,14 +46,16 @@ The order needed to deploy the platform should be:
    - Neutron
    - Nova-Compute
    - The rest of services (cinder, swift, horizon...)
-
-For this step, you can use [k8s-configs] (https://github.com/BBVA/openstack-k8s/tree/master/k8s-configs/kubernetes-templates) in order to deploy each service manually in kubernetes, or if you are using Rancher, you can load this folder as a Rancher Catalog.
+   
+   You can use [k8s-configs] (https://github.com/BBVA/openstack-k8s/tree/master/k8s-configs/kubernetes-templates) in order to deploy each service manually in kubernetes, or if you are using Rancher, you can load this folder as a Rancher Catalog.
   
 ## ETCD: Config loader
 
 The idea is to provide a way to get all the configuration files params and environment variables to the openstack services containers.
 The config-loader is a Pod launched just one time, which load all the params to the Etcd previously loaded:
+
 1. General Environment by changing the file [config-loader](https://github.com/BBVA/openstack-k8s/tree/master/config-loader/data/bootstrap/general)
+
 2. Openstack service configuration (For instance, just change the params needed for [Glance](https://github.com/BBVA/openstack-k8s/tree/master/config-loader/data/bootstrap/glance/). If you need some params extra for configure your environment, just add the line with the param needed.
       The config-loader process will do a merge between the default config-file params and the configuration params loaded here.
 
@@ -83,7 +89,9 @@ After that, will be shown all the services available to deploy just with one cli
 
 
 ## Work In Progress:
+
 We're working on the next services:
+
 - cinder (debugging NFS driver connection)
 - Swift (debugging)
 - Sahara
