@@ -84,6 +84,11 @@ For each service, you can use [k8s-configs] (https://github.com/BBVA/openstack-k
  - Replication Controllers
  - Pods
 
+Manually you can deploy all the services as usual in kubernetes following the sequence shown above. For instance:
+```
+$ kubectl create -f k8s-configs/kubernetes-templates/glance/0/glance-service.yaml
+$ kubectl create -f k8s-configs/kubernetes-templates/glance/0/glance-rc.yaml
+```
 Obviously, you can deploy manually in kubernetes loading the service, and replication controller yaml files. If you are using Rancher to deploy the stack, just add the folder in the Rancher Server gui, to get available the new catalog.
 After that, will be shown all the services available to deploy just with one click!
 
