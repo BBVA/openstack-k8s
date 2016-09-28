@@ -1,0 +1,5 @@
+name: Openstack
+description: |
+  (Experimental) Openstack services
+version: 0.1
+category: openstack

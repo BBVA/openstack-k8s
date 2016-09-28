@@ -1,0 +1,31 @@
+#### glance replication controller
+
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  labels:
+    app: glance
+  name: glance
+  namespace: default
+spec:
+  selector:
+    app: glance
+  template:
+    metadata:
+      labels:
+        app: glance
+    spec:
+      containers:
+      - image: glance:v0.2
+        imagePullPolicy: Always
+        name: glance
+        ports:
+        - containerPort: 9292
+          protocol: TCP
+        volumeMounts:
+        - mountPath: /var/lib/glance/images
+          name: glance-images-dir
+      volumes:
+      - name: glance-images-dir
+        hostPath:
+          path: /opt/glance-images

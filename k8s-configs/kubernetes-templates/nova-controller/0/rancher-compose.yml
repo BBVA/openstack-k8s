@@ -1,0 +1,7 @@
+.catalog:
+  name: nova-controller
+  version: 0.1
+  description: |
+    (Experimental) nova-controller.
+  minimum_rancher_version: v0.59.0
+  uuid: nova-controller-0

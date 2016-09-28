@@ -1,0 +1,7 @@
+.catalog:
+  name: heat
+  version: 0.1
+  description: |
+    (Experimental) heat.
+  minimum_rancher_version: v0.59.0
+  uuid: heat-0

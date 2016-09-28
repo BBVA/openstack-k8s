@@ -1,0 +1,17 @@
+#### keystone service
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: keystone
+  labels:
+    app: keystone
+spec:
+  ports:
+    - port: 5000
+      name: keystone-public
+    - port: 35357
+      name: keystone-admin
+  selector:
+    app: keystone
+

@@ -1,0 +1,14 @@
+#### horizon service
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: horizon
+  labels:
+    app: horizon
+spec:
+  ports:
+    - port: 80
+      name: horizon
+  selector:
+    app: horizon

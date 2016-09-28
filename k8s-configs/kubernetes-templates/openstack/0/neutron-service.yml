@@ -1,0 +1,14 @@
+#### neutron service
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: neutron
+  labels:
+    app: neutron
+spec:
+  ports:
+    - port: 9696
+      name: neutron
+  selector:
+    app: neutron

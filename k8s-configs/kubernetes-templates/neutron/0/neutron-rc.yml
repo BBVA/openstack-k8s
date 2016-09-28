@@ -1,0 +1,35 @@
+
+#### neutron replication controller
+
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  labels:
+    app: neutron
+  name: neutron
+  namespace: default
+spec:
+  selector:
+    app: neutron
+  template:
+    metadata:
+      labels:
+        app: neutron
+    spec:
+      containers:
+      - image: neutron:v0.2
+        imagePullPolicy: Always
+        securityContext:
+          privileged: true
+        name: neutron
+        ports:
+        - containerPort: 9696
+          protocol: TCP
+        volumeMounts:
+        - mountPath: /lib/modules
+          name: "modules"
+      volumes:
+      - hostPath:
+          path: /lib/modules
+        name: modules
+

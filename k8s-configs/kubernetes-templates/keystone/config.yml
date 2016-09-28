@@ -1,0 +1,5 @@
+name: keystone
+description: |
+  (Experimental) keystone
+version: 0.1
+category: openstack

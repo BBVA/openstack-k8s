@@ -1,0 +1,5 @@
+name: glance
+description: |
+  (Experimental) glance
+version: 0.1
+category: glance

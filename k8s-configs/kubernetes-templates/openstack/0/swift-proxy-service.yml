@@ -1,0 +1,14 @@
+#### swift service
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: swift
+  labels:
+    app: swift
+spec:
+  ports:
+    - port: 8080
+      name: swift-proxy
+  selector:
+    app: swift

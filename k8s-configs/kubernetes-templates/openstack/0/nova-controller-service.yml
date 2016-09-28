@@ -1,0 +1,18 @@
+#### nova service
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: nova-controller
+  labels:
+    app: nova-controller
+spec:
+  ports:
+    - port: 8774
+      name: nova-api
+    - port: 8773
+      name: nova-ec2
+    - port: 8775
+      name: nova-metadata
+  selector:
+    app: nova-controller

@@ -1,0 +1,7 @@
+.catalog:
+  name: nova-compute
+  version: 0.1
+  description: |
+    (Experimental) nova-compute.
+  minimum_rancher_version: v0.59.0
+  uuid: nova-compute-0

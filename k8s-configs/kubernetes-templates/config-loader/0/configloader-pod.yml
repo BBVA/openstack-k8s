@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: config-loader
+spec:
+  restartPolicy: Never
+  containers:
+    - image: config-loader:v0.2
+      imagePullPolicy: Always
+      name: config-loader
+
+

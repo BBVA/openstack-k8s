@@ -1,0 +1,28 @@
+#### swift replication controller
+
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  labels:
+    app: swift
+  name: swift
+  namespace: default
+spec:
+  selector:
+    app: swift
+  template:
+    metadata:
+      labels:
+        app: swift
+    spec:
+      containers:
+      - image: swift:v0.2
+        imagePullPolicy: Always
+        name: swift
+        resources:
+          limits:
+            cpu: 300m
+            memory: 200Mi
+        ports:
+        - containerPort: 8080
+          protocol: TCP

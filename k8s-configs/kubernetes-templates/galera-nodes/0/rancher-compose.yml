@@ -1,0 +1,16 @@
+.catalog:
+  name: galera-cluster
+  version: 0.1
+  description: |
+    (Experimental) galera.
+  minimum_rancher_version: v0.59.0
+  uuid: galera-0
+galera-cluster:
+  retain_ip: true
+  health_check:
+    port: 3306
+    interval: 5000
+    unhealthy_threshold: 3
+    request_line: ''
+    healthy_threshold: 2
+    response_timeout: 5000

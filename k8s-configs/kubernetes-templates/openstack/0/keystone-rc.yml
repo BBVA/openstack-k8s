@@ -1,0 +1,26 @@
+#### keystone replication controller
+
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  labels:
+    app: keystone
+  name: keystone
+  namespace: default
+spec:
+  selector:
+    app: keystone
+  template:
+    metadata:
+      labels:
+        app: keystone
+    spec:
+      containers:
+      - image: keystone:v0.2
+        imagePullPolicy: Always
+        name: keystone
+        ports:
+        - containerPort: 5000
+          protocol: TCP
+        - containerPort: 35357
+          protocol: TCP

@@ -1,0 +1,14 @@
+#### glance service
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: glance
+  labels:
+    app: glance
+spec:
+  ports:
+    - port: 9292
+      name: glance
+  selector:
+    app: glance

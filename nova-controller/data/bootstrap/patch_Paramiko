@@ -1,0 +1,18 @@
+--- a/crypto.py	2016-08-08 11:45:20.634765245 +0000
++++ b/crypto.py	2016-08-08 11:11:08.418692404 +0000
+@@ -173,11 +173,12 @@
+     # which version of pysaml2 is installed, Nova is likely to break. So we
+     # call "RSA.generate(bits)" which works on both pycrypto and pycryptodome
+     # and then wrap it into a paramiko.RSAKey
+-    rsa = RSA.generate(bits)
+-    key = paramiko.RSAKey(vals=(rsa.e, rsa.n))
+-    key.d = rsa.d
+-    key.p = rsa.p
+-    key.q = rsa.q
++#    rsa = RSA.generate(bits)
++#    key = paramiko.RSAKey(vals=(rsa.e, rsa.n))
++#    key.d = rsa.d
++#    key.p = rsa.p
++#    key.q = rsa.q
++    key = paramiko.RSAKey.generate(bits)
+     return key

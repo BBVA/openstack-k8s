@@ -1,0 +1,5 @@
+name: nova-compute
+description: |
+  (Experimental) nova-compute
+version: 0.1
+category: nova-compute

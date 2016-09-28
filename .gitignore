@@ -1,0 +1,6 @@
+# ignore files
+.DS_Store
+*~
+*.swp
+.idea
+security

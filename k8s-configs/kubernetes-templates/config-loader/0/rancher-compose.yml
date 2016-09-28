@@ -1,0 +1,8 @@
+.catalog:
+  name: config-loader
+  version: 0.1
+  description: |
+    (Experimental) config-loader to etcd
+  minimum_rancher_version: v0.59.0
+  uuid: cf-0
+

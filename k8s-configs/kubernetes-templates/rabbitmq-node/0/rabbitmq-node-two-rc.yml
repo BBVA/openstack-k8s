@@ -1,0 +1,39 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: rmq-node-2
+spec:
+  replicas: 1
+  selector:
+    name: rmq-node-2
+  template:
+    metadata:
+      labels:
+        name: rmq-node-2
+        type: rmq-node
+    spec:
+      containers:
+        - name: rmq
+          image: rabbitmq:3.5.4-management
+          env:
+            - name: RABBITMQ_ERLANG_COOKIE
+              value: 'secretcookiehere'
+            - name : RABBITMQ_DEFAULT_USER
+              value : ${USERNAME}
+            - name : RABBITMQ_DEFAULT_PASS
+              value : ${PASSWORD}
+            - name : HOSTNAME
+              value : rmq-node-2-svc
+          ports:
+            - containerPort: 15672
+              protocol : TCP
+              name : admin-port
+            - containerPort: 5672
+              protocol : TCP
+              name : default
+            - containerPort: 4369
+              protocol : TCP
+              name : epmd-port
+            - containerPort: 25672
+              protocol : TCP
+              name : dist-port

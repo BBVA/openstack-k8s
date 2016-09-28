@@ -1,0 +1,32 @@
+#### heat replication controller
+
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  labels:
+    app: heat
+  name: heat
+  namespace: default
+spec:
+  selector:
+    app: heat
+  template:
+    metadata:
+      labels:
+        app: heat
+    spec:
+      containers:
+      - image: heat:v0.2
+        imagePullPolicy: Always
+        name: heat
+        resources:
+          limits:
+            cpu: 300m
+            memory: 200Mi
+        ports:
+        - containerPort: 8000
+          protocol: TCP
+        - containerPort: 8004
+          protocol: TCP
+        - containerPort: 8003
+          protocol: TCP

@@ -1,0 +1,5 @@
+name: nova-controller
+description: |
+  (Experimental) nova-controller
+version: 0.1
+category: nova-controller

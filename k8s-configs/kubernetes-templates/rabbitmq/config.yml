@@ -1,0 +1,5 @@
+name: rabbitmq-master
+description: |
+  (Experimental) rabbitmq-master
+version: 0.1
+category: openstack

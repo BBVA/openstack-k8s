@@ -1,0 +1,31 @@
+#### nova replication controller
+
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  labels:
+    app: nova-controller
+  name: nova-controller
+  namespace: default
+spec:
+  selector:
+    app: nova-controller
+  template:
+    metadata:
+      labels:
+        app: nova-controller
+    spec:
+      containers:
+      - image: nova-controller:v0.2
+        imagePullPolicy: Always
+        securityContext:
+          privileged: true
+        name: nova-controller
+        ports:
+        - containerPort: 8774
+          protocol: TCP
+        - containerPort: 8773
+          protocol: TCP
+        - containerPort: 8775
+          protocol: TCP
+

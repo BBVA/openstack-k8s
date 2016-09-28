@@ -1,0 +1,25 @@
+
+#### horizon replication controller
+
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  labels:
+    app: horizon
+  name: horizon
+  namespace: default
+spec:
+  selector:
+    app: horizon
+  template:
+    metadata:
+      labels:
+        app: horizon
+    spec:
+      containers:
+      - image: horizon:v0.2
+        imagePullPolicy: Always
+        name: horizon
+        ports:
+        - containerPort: 80
+          protocol: TCP

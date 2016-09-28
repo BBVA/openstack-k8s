@@ -1,0 +1,16 @@
+#### heat service
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: heat
+  labels:
+    app: heat
+spec:
+  ports:
+    - port: 8000
+      name: heat-cfn
+    - port: 8004
+      name: heat
+  selector:
+    app: heat
