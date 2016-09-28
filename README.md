@@ -22,14 +22,14 @@ The order needed to deploy the platform should be:
 1. Load de config loader in order to get all the environment and configuration params to the Etcd service
         1. Configure the [config-loader](https://github.com/BBVA/openstack-k8s/tree/master/config-loader/data/bootstrap/general) renaming the file (without -sample) and configuring the password variables for all the services.
 2. Deploy each service in the next sequence:
-        1. - Mysql using the pxc-cluster
-        2. - Rabbitmq cluster
-        3. - Keystone (Must be the first openstack service to establish all the endpoint tables)
-        4. - Glance
-        5. - Nova-Controller
-        6. - Neutron
-        7. - Nova-Compute
-        8. - The rest of services (cinder, swift, horizon...)
+        1. Mysql using the pxc-cluster
+        2. Rabbitmq cluster
+        3. Keystone (Must be the first openstack service to establish all the endpoint tables)
+        4. Glance
+        5. Nova-Controller
+        6. Neutron
+        7. Nova-Compute
+        8. The rest of services (cinder, swift, horizon...)
   
 ## ETCD: Config loader
 
@@ -42,7 +42,9 @@ The config-loader is a Pod launched just one time, which load all the params to 
 The Etcd scheme is configured in different branches to keep the information:
 
 1. General Environment: Will be created a new branch in the Etcd named `general` where will be loaded all the enviroment params shown below. An example:
-    ```general/MYSQL_ROOT_PASSWORD=mysql_password```
+  ```
+  general/MYSQL_ROOT_PASSWORD=mysql_password
+  ```
 2. Openstack service configuration: Will be created a branch with the next structure:
         * Node Role: Useful to separate into controller node, storage node or compute node
         * Service Name: The name of the service
@@ -51,7 +53,9 @@ The Etcd scheme is configured in different branches to keep the information:
         * Key=value: the key/value param will be modified
 
         For instance, in a controller node with the glance service, if we need to modify the connection url inside the database section in the glance-api.conf file should be:
-        controller/glance/glance-api.conf/database/connection=mysql://glance:$GLANCE_DB_PASSWORD@$MYSQL_HOST/glance
+```
+controller/glance/glance-api.conf/database/connection=mysql://glance:$GLANCE_DB_PASSWORD@$MYSQL_HOST/glance
+```
 
 
 ## Work In Progress:
