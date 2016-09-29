@@ -1,5 +1,0 @@
-name: rabbitmq-nodes
-description: |
-  (Experimental) rabbitmq-nodes
-version: 0.1
-category: openstack
