@@ -1,10 +1,16 @@
 # Openstack-k8s: Openstack Kubernetes deployment
 
-This is an Openstack deployment based on Neutron (without any SDN solution) using kubernetes and docker containers. 
+This Project is being developed in order to facilitate the Openstack deployment based on Kubernetes and docker containers.
+The openstack distribution is based on the upstream code, and you can deploy a specific openstack version changing the "version" param in the dockerfile for each Openstack service.
+The project requires kubernetes and uses Rancher to deploy the k8s cluster faster.
+
+## Requirements:
+- A k8s cluster ready is needed to deploy all the services (including the Etcd service)
+- A DNS services is needed to resolve the k8s services name
 
 ## Features:
 - Fast Openstack release upgrade: version is parameterized in Dockerfiles getting the code directly from upstream.
-- Configuration files are externalized to the k8s ETCD. No containers based on config-files. Just get it from Etcd !!
+- Configuration files live only in the k8s ETCD. Just get them from Etcd !!
 - Kubernetes cluster is distributed automatically between all the hosts (using rancher to deploy it).
 - Openstack Service definition is developed in k8s to be scaled (only the first time launched should create the db scheme and tables in keystone), so you can modify the replica parameter to scale up.
 
@@ -47,7 +53,7 @@ The order needed to deploy the platform should be:
    - Nova-Compute
    - The rest of services (cinder, swift, horizon...)
    
-   You can use [k8s-configs] (https://github.com/BBVA/openstack-k8s/tree/master/k8s-configs/kubernetes-templates) in order to deploy each service manually in kubernetes, or if you are using Rancher, you can load this folder as a Rancher Catalog.
+   You can use [k8s-configs] (https://github.com/BBVA/k8s-configs) in order to deploy each service manually in kubernetes, or if you are using Rancher, you can load this folder as a Rancher Catalog.
   
 ## ETCD: Config loader
 
@@ -79,7 +85,7 @@ controller/glance/glance-api.conf/database/connection=mysql://glance:$GLANCE_DB_
 
 ## Kubernetes Deployment
 
-For each service, you can use [k8s-configs] (https://github.com/BBVA/openstack-k8s/tree/master/k8s-configs/kubernetes-templates) in order to deploy each service manually in kubernetes. The deployment is based on:
+For each service, you can use [k8s-configs] (https://github.com/BBVA/k8s-configs) in order to deploy each service manually in kubernetes. The deployment is based on:
  - Services
  - Replication Controllers
  - Pods
@@ -89,8 +95,8 @@ Manually you can deploy all the services as usual in kubernetes following the se
 $ kubectl create -f k8s-configs/kubernetes-templates/glance/0/glance-service.yaml
 $ kubectl create -f k8s-configs/kubernetes-templates/glance/0/glance-rc.yaml
 ```
-Obviously, you can deploy manually in kubernetes loading the service, and replication controller yaml files. If you are using Rancher to deploy the stack, just add the folder in the Rancher Server gui, to get available the new catalog.
-After that, will be shown all the services available to deploy just with one click!
+Obviously, you can deploy manually in kubernetes loading the service, and replication controller yaml files. If you are using Rancher to deploy the stack, just add this repo in the Rancher Catalog gui, to get it available.
+After that, all the services will be shown available to deploy just with one click!
 
 
 ## Work In Progress:
@@ -103,3 +109,6 @@ We're working on the next services:
 - Magnum
 - Trove
 - Designate
+
+## Authors
+- This code have been developed by the BBVA Innovation Team <eurocloud-oneteam.group@bbva.com>
