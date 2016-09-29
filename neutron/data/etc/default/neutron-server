@@ -1,0 +1,1 @@
+NEUTRON_PLUGIN_CONFIG=”/etc/neutron/plugins/nuage_plugin.ini”

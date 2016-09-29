@@ -6,7 +6,7 @@ ENV OPENSTACK_VERSION=mitaka \
     PBR=8.1.2
 
 RUN     apt-get update && \
-        apt-get install -y openvswitch-switch iptables dnsmasq dnsmasq-utils arping && \
+        apt-get install -y iptables dnsmasq dnsmasq-utils arping coreutils && \
         rm -rf /var/lib/apt/lists/*
 
 RUN    curl -fSL https://github.com/openstack/neutron/archive/${PBR}.zip -o neutron-${PBR}.zip \
@@ -29,7 +29,16 @@ RUN    curl -fSL https://github.com/openstack/neutron/archive/${PBR}.zip -o neut
 
 ADD     data /
 
-RUN     chown root:root /bootstrap/*.sh && chmod a+x /bootstrap/*.sh
+RUN	apt-get -y update \
+     && dpkg -i  /Nuage-VSP/4.0R4/nuagenetlib_8.0.0-4.0.4-43_all.deb \
+                 /Nuage-VSP/4.0R4/nuage-metadata-agent_4.0.4-49_all.deb \
+                 /Nuage-VSP/4.0R4/nuage-openstack-neutron_8.0.0-4.0.4-43_all.deb \
+                 /Nuage-VSP/4.0R4/nuage-openstack-neutronclient_4.1.0-4.0.4-43_all.deb ; exit 0
+
+RUN  apt-get -fy install \
+     && pip install configobj \
+     && chown root:root /bootstrap/*.sh && chmod a+x /bootstrap/*.sh
+
 
 ENTRYPOINT  ["/bootstrap/bootstrap.sh"]
 EXPOSE 9696

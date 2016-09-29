@@ -1,0 +1,47 @@
+# Copyright (C) 2014, Nuage Networks
+
+# METADATA_PORT: This is the location to get the values from when migrating
+# from Neutron metadata agent to Nuage metadata agent and these values need
+# not be populated in neutron.conf while using Nuage Metadata agent.
+# (metadata_port in neutron.conf)
+METADATA_PORT=9697
+
+# NOVA_METADATA_IP: IP address used by Nova metadata server. This is the
+# location to get the values from when migrating from Neutron metadata
+# agent to Nuage metadata agent. These values need not be populated in
+# neutron.conf while using Nuage Metadata agent.
+# (nova_metadata_ip in neutron.conf)
+NOVA_METADATA_IP=$NOVA_HOSTNAME
+
+# NOVA_METADATA_PORT: TCP Port used by Nova metadata server
+# (metadata_listen_port in nova.conf or nova_metadata_port in neutron.conf)
+NOVA_METADATA_PORT=8775
+
+# METADATA_PROXY_SHARED_SECRET: Shared secret to sign the instance-id
+# request.  Must match metadata_proxy_shared_secret in nova.conf
+METADATA_PROXY_SHARED_SECRET=$METADATA_SHARED_SECRET
+
+# NOVA_CLIENT_VERSION:
+NOVA_CLIENT_VERSION=2
+
+# NOVA_OS_USERNAME:
+NOVA_OS_USERNAME=$NOVA_USERNAME
+
+# NOVA_OS_PASSWORD:
+NOVA_OS_PASSWORD=$NOVA_PASSWORD
+
+# NOVA_OS_TENANT_NAME:
+NOVA_OS_TENANT_NAME=services
+
+# NOVA_OS_AUTH_URL:
+NOVA_OS_AUTH_URL=http://$KEYSTONE_HOSTNAME:35357
+
+# NOVA_REGION_NAME:
+NOVA_REGION_NAME=$REGION
+
+# NUAGE_METADATA_AGENT_START_WITH_OVS: if nuage-metadata-agent needs to be
+# started with nuage-openvswitch-switch
+NUAGE_METADATA_AGENT_START_WITH_OVS=true
+
+# NOVA_API_ENDPOINT_TYPE: one of publicURL, internalURL, adminURL
+NOVA_API_ENDPOINT_TYPE=internalURL

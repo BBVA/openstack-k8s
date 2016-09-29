@@ -11,20 +11,21 @@ source /bootstrap/environment.sh
 #############################
 get_environment
 
+read VSC_IP _ < <(getent hosts $VSC_HOSTNAME)
+export NUAGE_ACTIVE_CONTROLLER=$VSC_IP
+
 ############################
 # CONFIGURE NOVA
 ############################
 # llamada a la funcion del configuration.sh
 re_write_file "/compute/nova/nova.conf" "/etc/nova/"
-re_write_file "/controller/neutron/neutron.conf" "/etc/neutron/"
-re_write_file "/controller/neutron/openvswitch_agent.ini" "/etc/neutron/plugins/ml2/"
+fix_configs "/etc/default/"
 
 sleep 3
 MI_IP=`ip a | grep 10.4 | awk '{print $2}' | cut -d"/" -f1`
 echo "El valor de MY_IP es: $MI_IP"
 sed -i "s!^my_ip.*=.*!my_ip = $MI_IP!" /etc/nova/nova.conf
 sed -i "s!^#metadata_host.*=.*!metadata_host = $MI_IP!" /etc/nova/nova.conf
-sed -i "s%^local_ip.*=.*%local_ip = $MI_IP%" /etc/neutron/plugins/ml2/openvswitch_agent.ini
 # create a admin-openrc.sh file
 
 cat >~/openrc <<EOF
@@ -46,10 +47,10 @@ mkdir -p /var/lib/nova/instances
 chmod o+x /var/lib/nova/instances
 chown root:kvm /dev/kvm
 chmod 666 /dev/kvm
-service openvswitch-switch start &
-sleep 4
-ovs-vsctl add-br br-ex
-neutron-openvswitch-agent --config-file /etc/neutron/neutron.conf --config-file /etc/neutron/plugins/ml2/openvswitch_agent.ini &
+
+/etc/init.d/nuage-openvswitch-switch start &
 dbus-daemon --config-file=/etc/dbus-1/system.conf &
 libvirtd &
+/usr/share/openvswitch/scripts/nuage-metadata-agent.init start &
 nova-compute --config-file=/etc/nova/nova.conf
+

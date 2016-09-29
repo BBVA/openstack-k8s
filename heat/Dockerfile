@@ -25,6 +25,9 @@ RUN    set -ex \
 
 ADD     data /
 
+RUN	apt-get -y update \
+     && dpkg -i  /Nuage-VSP/4.0R4/nuage-openstack-heat_6.0.0-4.0.4-43_all.deb
+
 RUN     chown root:root /bootstrap/*.sh && chmod a+x /bootstrap/*.sh
 
 ENTRYPOINT  ["/bootstrap/bootstrap.sh"]

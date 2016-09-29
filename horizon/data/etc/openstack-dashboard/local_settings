@@ -719,3 +719,4 @@ REST_API_REQUIRED_SETTINGS = ['OPENSTACK_HYPERVISOR_FEATURES',
 # http://tinyurl.com/anticlickjack
 #DISALLOW_IFRAME_EMBED = True
 
+HORIZON_CONFIG['customization_module'] = 'nuage_horizon.customization'

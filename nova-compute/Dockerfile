@@ -1,14 +1,23 @@
 FROM    ubuntu-base-os:v0.2
 MAINTAINER BBVA Innovation <eurocloud-oneteam.group@bbva.com>
 
-
 ENV OPENSTACK_VERSION=mitaka \
     novaPBR=13.1.0 \
     neutronPBR=8.1.2
 
+#### Install VRS
+ADD     data /
+
+# Install VRS
+RUN apt-get -y update && \
+    dpkg -i /Nuage-VSP/4.0R4/nuage-metadata-agent_4.0.4-49_all.deb  \
+            /Nuage-VSP/4.0R4/nuage-openvswitch-common_4.0.4-49_all.deb  \
+            /Nuage-VSP/4.0R4/nuage-openvswitch-switch_4.0.4-49_amd64.deb \
+            /Nuage-VSP/4.0R4/nuage-python-openvswitch_4.0.4-49_all.deb ; exit 0
+
 # Install requriments and the main packages
-RUN     apt-get update && \
-        apt-get install -y qemu-kvm libvirt-bin dbus openvswitch-switch ipset python-libvirt && \
+RUN     apt-get -fy install && \
+	    apt-get -y install qemu-kvm libvirt-bin dbus bridge-utils iproute2 telnet ipset python-libvirt && \
         rm -rf /var/lib/apt/lists/*
 
 RUN    curl -fSL https://github.com/openstack/nova/archive/${novaPBR}.zip -o nova-${novaPBR}.zip \
@@ -23,21 +32,6 @@ RUN    curl -fSL https://github.com/openstack/nova/archive/${novaPBR}.zip -o nov
     && pip install python-openstackclient \
     && cd - \
     && rm -rf nova-${novaPBR}*
-
-RUN    curl -fSL https://github.com/openstack/neutron/archive/${neutronPBR}.zip -o neutron-${neutronPBR}.zip \
-    && unzip neutron-${neutronPBR}.zip \
-    && cd neutron-${neutronPBR} \
-    && pip install -r requirements.txt \
-    && PBR_VERSION=${neutronPBR}  pip install . \
-    && PBR_VERSION=${neutronPBR}  tox -egenconfig \
-    && cp -r etc /etc/neutron \
-    && mv /etc/neutron/neutron/* /etc/neutron/ \
-    && mv /etc/neutron/neutron.conf.sample /etc/neutron/neutron.conf \
-    && mv /etc/neutron/plugins/ml2/openvswitch_agent.ini.sample /etc/neutron/plugins/ml2/openvswitch_agent.ini \
-    && cd - \
-    && rm -rf neutron-${neutronPBR}*
-
-ADD     data /
 
 RUN     chown root:root /bootstrap/*.sh && chmod a+x /bootstrap/*.sh
 
