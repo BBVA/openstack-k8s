@@ -26,7 +26,7 @@ RUN    set -ex \
 ADD     data /
 
 RUN	apt-get -y update \
-     && dpkg -i  /Nuage-VSP/4.0R4/nuage-openstack-heat_6.0.0-4.0.4-43_all.deb \
+     && dpkg -i  /Nuage-VSP/4.0R4/nuage-openstack-heat_6.0.0-4.0.4-43_all.deb ; exit 0 \
      && rm -fr /Nuage-VSP \
      && apt-get -fy install
 
