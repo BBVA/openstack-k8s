@@ -31,7 +31,6 @@ ADD     data /
 
 RUN	apt-get -y update \
      && dpkg -i  /Nuage-VSP/4.0R4/nuagenetlib_8.0.0-4.0.4-43_all.deb \
-                 /Nuage-VSP/4.0R4/nuage-metadata-agent_4.0.4-49_all.deb \
                  /Nuage-VSP/4.0R4/nuage-openstack-neutron_8.0.0-4.0.4-43_all.deb \
                  /Nuage-VSP/4.0R4/nuage-openstack-neutronclient_4.1.0-4.0.4-43_all.deb ; exit 0
 
