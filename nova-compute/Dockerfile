@@ -8,15 +8,11 @@ ENV OPENSTACK_VERSION=mitaka \
 #### Install VRS
 ADD     data /
 
-RUN     apt-get update && \
-        apt-get install -y iptables dnsmasq dnsmasq-utils arping coreutils python-pbr python-babel vlan && \
-        rm -rf /var/lib/apt/lists/*
-
 # Install VRS
 RUN apt-get -y update && \
     dpkg -i /Nuage-VSP/4.0R4/nuage-openvswitch-common_4.0.4-49_all.deb  \
-            /Nuage-VSP/4.0R4/nuage-python-openvswitch_4.0.4-49_all.deb \
             /Nuage-VSP/4.0R4/nuage-openvswitch-switch_4.0.4-49_amd64.deb \
+            /Nuage-VSP/4.0R4/nuage-python-openvswitch_4.0.4-49_all.deb \
             /Nuage-VSP/4.0R4/nuage-metadata-agent_4.0.4-49_all.deb ; exit 0
 
 # Install requriments and the main packages
