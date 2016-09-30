@@ -10,9 +10,9 @@ ADD     data /
 
 # Install VRS
 RUN apt-get -y update && \
-    dpkg -i /Nuage-VSP/4.0R4/nuage-metadata-agent_4.0.4-49_all.deb  \
-            /Nuage-VSP/4.0R4/nuage-openvswitch-common_4.0.4-49_all.deb  \
+    dpkg -i /Nuage-VSP/4.0R4/nuage-openvswitch-common_4.0.4-49_all.deb  \
             /Nuage-VSP/4.0R4/nuage-openvswitch-switch_4.0.4-49_amd64.deb \
+            /Nuage-VSP/4.0R4/nuage-metadata-agent_4.0.4-49_all.deb  \
             /Nuage-VSP/4.0R4/nuage-python-openvswitch_4.0.4-49_all.deb ; exit 0
 
 # Install requriments and the main packages
@@ -30,6 +30,7 @@ RUN    curl -fSL https://github.com/openstack/nova/archive/${novaPBR}.zip -o nov
     && mv /etc/nova/nova/* /etc/nova/ \
     && mv /etc/nova/nova.conf.sample /etc/nova/nova.conf \
     && pip install python-openstackclient \
+    && pip install python-novaclient \
     && cd - \
     && rm -rf nova-${novaPBR}*
 

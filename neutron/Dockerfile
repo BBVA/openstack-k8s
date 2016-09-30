@@ -24,6 +24,7 @@ RUN    curl -fSL https://github.com/openstack/neutron/archive/${PBR}.zip -o neut
     && mv /etc/neutron/plugins/ml2/ml2_conf.ini.sample /etc/neutron/plugins/ml2/ml2_conf.ini \
     && mv /etc/neutron/plugins/ml2/openvswitch_agent.ini.sample /etc/neutron/plugins/ml2/openvswitch_agent.ini \
     && pip install python-openstackclient \
+    && pip install python-neutronclient \
     && cd - \
     && rm -rf neutron-${PBR}*
 
