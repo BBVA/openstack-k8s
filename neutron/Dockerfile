@@ -6,7 +6,7 @@ ENV OPENSTACK_VERSION=mitaka \
     PBR=8.1.2
 
 RUN     apt-get update && \
-        apt-get install -y iptables dnsmasq dnsmasq-utils arping coreutils && \
+        apt-get install -y iptables dnsmasq dnsmasq-utils arping coreutils python-pbr python-babel && \
         rm -rf /var/lib/apt/lists/*
 
 RUN    curl -fSL https://github.com/openstack/neutron/archive/${PBR}.zip -o neutron-${PBR}.zip \
