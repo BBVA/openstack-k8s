@@ -1,4 +1,4 @@
-FROM    ubuntu-base-os:v0.2
+FROM    ubuntu-base-os-nuage:v0.2
 MAINTAINER BBVA Innovation <eurocloud-oneteam.group@bbva.com>
 
 
@@ -9,7 +9,6 @@ ENV OPENSTACK_VERSION=mitaka \
 RUN     apt-get update && \
         apt-get install -y apache2 libapache2-mod-wsgi memcached gettext && \
         rm -rf /var/lib/apt/lists/*
-
 
 ADD     data /
 
@@ -40,6 +39,10 @@ RUN    curl -fSL https://github.com/openstack/horizon/archive/${PBR}.zip -o hori
     && chown -R www-data:www-data /usr/share/openstack-dashboard/* \
     && cd - \
     && rm -rf horizon-${PBR}*
+
+RUN	 apt-get -y update \
+     && dpkg -i  /Nuage-VSP/4.0R4/nuage-openstack-horizon_9.0.0-4.0.4-43_all.deb \
+     && rm -fr /Nuage-VSP
 
 RUN     chown root:root /bootstrap/*.sh && chmod a+x /bootstrap/*.sh
 

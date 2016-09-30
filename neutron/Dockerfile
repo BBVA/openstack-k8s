@@ -1,4 +1,4 @@
-FROM    ubuntu-base-os:v0.2
+FROM    ubuntu-base-os-nuage:v0.2
 MAINTAINER BBVA Innovation <eurocloud-oneteam.group@bbva.com>
 
 

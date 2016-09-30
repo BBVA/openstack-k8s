@@ -1,4 +1,4 @@
-FROM    ubuntu-base-os:v0.2
+FROM    ubuntu-base-os-nuage:v0.2
 MAINTAINER BBVA Innovation <eurocloud-oneteam.group@bbva.com>
 
 
@@ -26,7 +26,8 @@ RUN    set -ex \
 ADD     data /
 
 RUN	apt-get -y update \
-     && dpkg -i  /Nuage-VSP/4.0R4/nuage-openstack-heat_6.0.0-4.0.4-43_all.deb
+     && dpkg -i  /Nuage-VSP/4.0R4/nuage-openstack-heat_6.0.0-4.0.4-43_all.deb \
+     && rm -fr /Nuage-VSP
 
 RUN     chown root:root /bootstrap/*.sh && chmod a+x /bootstrap/*.sh
 
