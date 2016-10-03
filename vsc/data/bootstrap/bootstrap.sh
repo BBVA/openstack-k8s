@@ -21,7 +21,7 @@ export MY_DNS
 export MY_HOSTNAME
 
 
-guestmount -a /image/vsc_singledisk_v40r4.qcow2 -m /dev/sda1  /mnt
+guestmount -a /image/image.qcow2 -m /dev/sda1  /mnt
 # Fix the VSC config files
 fix_configs /bootstrap/*.cfg
 cp -f /bootstrap/*.cfg /mnt
