@@ -19,7 +19,7 @@ export MY_IP
 export MY_GW
 export MY_DNS
 export MY_HOSTNAME
-
+export LIBGUESTFS_BACKEND=direct
 
 guestmount -a /image/image.qcow2 -m /dev/sda1  /mnt
 # Fix the VSC config files
@@ -31,4 +31,4 @@ chmod 0644 /mnt/config.cfg
 
 guestunmount /mnt
 
-/usr/local/bin/startvm -smbios type=1,product=TIMOS -nographic $@
+/usr/local/bin/startvm $@ -smbios type=1,product=TIMOS -nographic
