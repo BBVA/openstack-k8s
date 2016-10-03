@@ -7,7 +7,7 @@ ADD data /
 RUN  chown qemu:qemu /image/*.qcow2 \
      && echo "options kvm_intel ept=0" > /etc/modprobe.d/nuage_kvm_intel.conf \
      && yum install -y http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-8.noarch.rpm \
-                        libguestfs-tools \
+                        libguestfs-tools qemu-kvm libvirt virt-install bridge-utils \
      && yum update -y \
      && yum install -y moreutils \
      && yum clean all \
