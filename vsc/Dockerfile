@@ -1,4 +1,4 @@
-FROM kvm:latest
+FROM bbvainnotech/kvm:latest
 MAINTAINER BBVA Innovation <eurocloud-oneteam.group@bbva.com>
 ENV container docker
 
