@@ -31,4 +31,4 @@ chmod 0644 /mnt/config.cfg
 
 guestunmount /mnt
 
-/usr/local/bin/startvm $@ -smbios type=1,product=TIMOS -nographic
+exec /usr/local/bin/startvm $@ -smbios type=1,product=TIMOS -nographic
