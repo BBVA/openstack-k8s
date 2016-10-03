@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 
-source functions.sh
+source /bootstrap/functions.sh
 get_environment
 
 # Get my IPv4 address (including netmask)
