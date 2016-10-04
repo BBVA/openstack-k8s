@@ -22,6 +22,8 @@
 # 3. Modify my.cnf and cluster.cnf to reflect available nodes to join
 #
 
+get_environment
+
 # if NUM_NODES not passed, default to 3
 if [ -z "$NUM_NODES" ]; then
   NUM_NODES=3
