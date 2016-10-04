@@ -36,9 +36,9 @@ VOLUME /var/lib/mysql
 COPY my.cnf /etc/mysql/my.cnf
 COPY cluster.cnf /etc/mysql/conf.d/cluster.cnf
 
-COPY docker-entrypoint.sh /entrypoint.sh
-RUN     chown root:root /entrypoint.sh && chmod a+x /entrypoint.sh
-ENTRYPOINT ["/entrypoint.sh"]
+RUN     chown root:root /bootstrap/*.sh && chmod a+x /bootstrap/*.sh
+
+ENTRYPOINT  ["/bootstrap/bootstrap.sh"]
 
 EXPOSE 3306 4444 4567 4568
 CMD ["mysqld"]
