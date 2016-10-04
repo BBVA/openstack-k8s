@@ -17,4 +17,4 @@ echo "*** Log in the WebUI at port 15672 ***"
 
 sleep 2
 ulimit -S -n 65536
-rabbitmq-server
+rabbitmq-server &
