@@ -10,5 +10,4 @@ RUN  chown qemu:qemu /image/*.qcow2 \
      && yum clean all
 
 ENV AUTO_ATTACH='yes' \
-    KVM_CPU_OPTS='-m 4051 -smp 4,sockets=4,cores=1,threads=1'
-
+    KVM_CPU_OPTS='-m 12288 -smp 4,sockets=4,cores=1,threads=1'
