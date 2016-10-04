@@ -21,7 +21,7 @@
 # 2. MySQL is initially started with this script a first time
 # 3. Modify my.cnf and cluster.cnf to reflect available nodes to join
 #
-
+source /bootstrap/environment.sh
 get_environment
 
 # if NUM_NODES not passed, default to 3
