@@ -3,7 +3,11 @@
 source /bootstrap/functions.sh
 get_environment
 
-rabbitmq-server -detached -setcookie $RABBIT_COOKIE
+echo $RABBIT_COOKIE > /var/lib/rabbitmq/.erlang.cookie 
+chown rabbitmq:rabbitmq /var/lib/rabbitmq/.erlang.cookie 
+chmod 400 /var/lib/rabbitmq/.erlang.cookie 
+
+rabbitmq-server -detached 
 sleep 6
 
 rabbitmqctl add_user $RABBIT_USERID $RABBIT_PASSWORD
@@ -18,5 +22,5 @@ echo "*** User creation completed. ***"
 echo "*** Log in the WebUI at port 15672 ***"
 
 ulimit -S -n 65536
-rabbitmq-server -setcookie $RABBIT_COOKIE
+rabbitmq-server
 
