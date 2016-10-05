@@ -25,3 +25,9 @@ rabbitmqctl stop
 sleep 4
 rabbitmq-server 
 
+
+
+
+
+
+curl -sSk -H "Authorization: Bearer $KUBE_TOKEN" https://$KUBERNETES_SERVICE_HOST:$KUBERNETES_PORT_443_TCP_PORT/api/v1/namespaces/default/pods/ | jq -c '.items[] | select(.status.containerStatuses[].name | contains("rmq"))' | jq '. | { name: .metadata.name, IP: .status.podIP}'
