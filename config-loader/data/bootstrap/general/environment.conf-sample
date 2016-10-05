@@ -55,3 +55,4 @@ general/NUAGE_PERSONALITY=vrs
 general/NUAGE_PLATFORM="kvm"
 general/NUAGE_CONN_TYPE=tcp
 general/NUAGE_DEFAULT_BRIDGE=alubr0
+general/SELECTED_NETWORK=10.42.0.0/16
