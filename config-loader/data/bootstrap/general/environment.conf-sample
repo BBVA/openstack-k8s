@@ -47,4 +47,5 @@ general/SWIFT_PASSWORD=swift_password
 general/RABBIT_HOSTNAME=rabbitmq.default.svc
 general/RABBIT_USERID=rabbit
 general/RABBIT_PASSWORD=rabbit_password
+general/RABBIT_COOKIE=cookie_rabbitmq_cluster
 general/METADATA_SHARED_SECRET=shared_secret
