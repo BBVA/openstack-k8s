@@ -13,6 +13,6 @@ RUN  echo "options kvm_intel ept=0" > /etc/modprobe.d/nuage_kvm_intel.conf \
 ENV AUTO_ATTACH='yes' \
     KVM_CPU_OPTS='-m 12288 -smp 4,sockets=4,cores=1,threads=1'
 
-CMD [ "-nographic" ]
+CMD [ "-device qxl-vga,id=video0,ram_size=67108864,vram_size=67108864,vgamem_mb=16,bus=pci.0,addr=0x3 -display none" ]
 
 ENTRYPOINT ["/bootstrap/bootstrap.sh"]
