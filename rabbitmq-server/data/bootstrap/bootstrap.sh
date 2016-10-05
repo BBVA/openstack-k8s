@@ -3,7 +3,7 @@
 source functions.sh
 get_environment
 
-rabbitmq-server -detached
+rabbitmq-server -detached &
 sleep 2
 
 rabbitmqctl add_user $RABBIT_USERID $RABBIT_PASSWORD
