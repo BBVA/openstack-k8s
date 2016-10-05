@@ -4,11 +4,7 @@ source /bootstrap/functions.sh
 get_environment
 
 KUBE_TOKEN=$(</var/run/secrets/kubernetes.io/serviceaccount/token)
-var1=$(curl -sSk -H "Authorization: Bearer $KUBE_TOKEN" https://$KUBERNETES_SERVICE_HOST:$KUBERNETES_PORT_443_TCP_PORT/api/v1/namespaces/default/pods/ | jq -c '.items[] | select(.status.containerStatuses[].name | contains("rmq"))' | jq '. | { name: .metadata.name, IP: .status.podIP}' | jq -r '[.IP, .name] | join(" ")')
-
-for i in $var1; do
-	echo $i >> /etc/hosts 
-done
+curl -sSk -H "Authorization: Bearer $KUBE_TOKEN" https://$KUBERNETES_SERVICE_HOST:$KUBERNETES_PORT_443_TCP_PORT/api/v1/namespaces/default/pods/ | jq -c '.items[] | select(.status.containerStatuses[].name | contains("rmq"))' | jq '. | { name: .metadata.name, IP: .status.podIP}' | jq -r '[.IP, .name] | join(" ")' >> /etc/hosts
 
 echo $RABBIT_COOKIE > /var/lib/rabbitmq/.erlang.cookie 
 chown rabbitmq:rabbitmq /var/lib/rabbitmq/.erlang.cookie 
