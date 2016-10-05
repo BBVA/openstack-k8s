@@ -1,4 +1,4 @@
-
+#!/usr/bin/env bash
 
 source functions.sh
 get_environment
