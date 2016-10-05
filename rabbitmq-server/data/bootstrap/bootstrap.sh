@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source functions.sh
+source /bootstrap/functions.sh
 get_environment
 
 rabbitmq-server -detached
