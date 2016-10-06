@@ -49,3 +49,4 @@ general/RABBIT_USERID=rabbit
 general/RABBIT_PASSWORD=rabbit_password
 general/RABBIT_COOKIE=cookie_rabbitmq_cluster
 general/METADATA_SHARED_SECRET=shared_secret
+general/SELECTED_NETWORK=10.42.0.0/16
