@@ -110,5 +110,8 @@ We're working on the next services:
 - Trove
 - Designate
 
-## Authors
+## Authors and references
 - This code have been developed by the BBVA Innovation Team <eurocloud-oneteam.group@bbva.com>
+- We use the galera implementation from [ebay] (https://github.com/eBay/Kubernetes/tree/master/examples/mysql-galera). 
+- We use the basic schemes for the dockerfile from [int32bit] (https://github.com/int32bit)
+- We use the rabbitmq cluster implementation from [puckel] (https://github.com/puckel/docker-rabbitmq)
