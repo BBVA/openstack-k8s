@@ -18,6 +18,7 @@ RUN  chown qemu:qemu /image/*.qcow2 \
      && chmod a+x /bootstrap/*.sh
 
 ENV AUTO_ATTACH='yes' \
+    DISABLE_VGA='yes' \
     KVM_CPU_OPTS='-m 4051 -smp 4,sockets=4,cores=1,threads=1'
 
 ENTRYPOINT ["/bootstrap/bootstrap.sh"]
