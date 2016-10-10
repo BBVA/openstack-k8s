@@ -21,7 +21,7 @@ export MY_DNS
 export MY_HOSTNAME
 export LIBGUESTFS_BACKEND=direct
 
-guestmount -a /image/image.qcow2 -m /dev/sda1  /mnt
+guestmount -a /image/image -m /dev/sda1  /mnt
 # Fix the VSC config files
 fix_configs /bootstrap/*.cfg
 cp -f /bootstrap/*.cfg /mnt
