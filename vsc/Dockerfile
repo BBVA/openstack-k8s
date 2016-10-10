@@ -13,9 +13,7 @@ RUN  chown qemu:qemu /image/*.qcow2 \
      && yum install -y moreutils \
      && yum clean all \
      && mv /bootstrap/jq-linux64 /usr/bin/jq \
-     && chmod +x /usr/bin/jq \
-     && chown root:root /bootstrap/*.sh \
-     && chmod a+x /bootstrap/*.sh
+     && chown root:root /bootstrap/*.sh
 
 ENV AUTO_ATTACH='yes' \
     DISABLE_VGA='yes' \
