@@ -1,0 +1,17 @@
+#!/bin/bash
+
+JBOSS_CONFIG_DIR="/opt/vsd/jboss/standalone/configuration"
+
+echo "$(hostname -i) vsd.default.svc.cluster.local" >> /etc/hosts
+/opt/vsd/vsd-install.sh -a vsd.default.svc.cluster.local -t s -y
+monit -g vsd-core stop
+cp $JBOSS_CONFIG_DIR/vsd.keystore $JBOSS_CONFIG_DIR/vsd.keystore.orig
+cp $JBOSS_CONFIG_DIR/standalone-full-ha.xml $JBOSS_CONFIG_DIR/standalone-full-ha.xml.orig
+
+cp /root/vsd.keystore $JBOSS_CONFIG_DIR/vsd.keystore
+cp /root/standalone-full-ha.xml $JBOSS_CONFIG_DIR/standalone-full-ha.xml
+sleep 10
+monit -g vsd-core start
+sleep 300
+/root/license_inject.sh
+
