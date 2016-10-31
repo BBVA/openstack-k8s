@@ -82,3 +82,5 @@ cat ~/openrc
 cinder-scheduler --config-file=/etc/cinder/cinder.conf &
 cinder-api --config-file=/etc/cinder/cinder.conf &
 cinder-volume --config-file=/etc/cinder/cinder.conf
+
+sleep 1d
