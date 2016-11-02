@@ -18,8 +18,9 @@ RUN  set -ex; \
      cp -r etc/cinder/ /etc/cinder/ ; \
      mv /etc/cinder/cinder.conf.sample /etc/cinder/cinder.conf; \
      mkdir -p /var/lib/cinder/nfs; \
-     pip install python-openstackclient
-
+     pip install python-openstackclient \
+     pip uninstall kombu -y \
+     pip install kombu==3.0.35
 
 ADD     data /
 
