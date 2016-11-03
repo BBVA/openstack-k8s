@@ -1,0 +1,48 @@
+global
+        log 127.0.0.1 local0
+        log 127.0.0.1 local1 notice
+        maxconn 4096
+        maxpipes 1024
+        tune.ssl.default-dh-param 2048
+        chroot /var/lib/haproxy
+        user haproxy
+        group haproxy
+        daemon
+
+defaults
+        log     global
+        mode    http
+        option  tcplog
+        option  dontlognull
+        option  redispatch
+        option http-server-close
+        retries 3
+        timeout connect 5000
+        timeout client 50000
+        timeout server 50000
+        errorfile 400 /etc/haproxy/errors/400.http
+        errorfile 403 /etc/haproxy/errors/403.http
+        errorfile 408 /etc/haproxy/errors/408.http
+        errorfile 500 /etc/haproxy/errors/500.http
+        errorfile 502 /etc/haproxy/errors/502.http
+        errorfile 503 /etc/haproxy/errors/503.http
+        errorfile 504 /etc/haproxy/errors/504.http
+
+frontend c6c44c6b-28e7-4d86-8ba3-0e8215157e80_8443_frontend
+        bind *:8443
+        mode tcp
+        default_backend c6c44c6b-28e7-4d86-8ba3-0e8215157e80_8443_1_backend
+
+backend c6c44c6b-28e7-4d86-8ba3-0e8215157e80_8443_1_backend
+        mode tcp
+    reqadd X-Forwarded-Proto:\ https
+    balance roundrobin
+    timeout server 600s
+    stick-table type ip size 200k expire 30m
+    stick on src
+    balance roundrobin
+        server 93f1f610-9e0f-459e-ae63-789705281550 10.42.193.214:8443
+
+
+listen default
+        bind *:42

@@ -1,0 +1,14 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: vsd-tls
+  annotations:
+    scale: "3"
+    https.port: "8443"
+    config: "global\nmode tcp"
+spec:
+  tls:
+   - secretName: vsd
+  backend:
+    serviceName: vsd
+    servicePort: 8443
