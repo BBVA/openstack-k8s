@@ -4,6 +4,10 @@ MAINTAINER BBVA Innovation <eurocloud-oneteam.group@bbva.com>
 
 ENV OPENSTACK_VERSION=mitaka \
     PBR=8.0.0
+    
+RUN     apt-get update && \
+        apt-get install -y nfs-common && \
+        rm -rf /var/lib/apt/lists/*
 
 
 RUN  set -ex; \
