@@ -22,6 +22,11 @@ MI_IP=`ip a | grep 10.4 | awk '{print $2}' | cut -d"/" -f1`
 echo "El valor de MY_IP es: $MI_IP"
 sed -i "s!^my_ip.*=.*!my_ip = $MI_IP!" /etc/cinder/cinder.conf
 
+cat >/etc/cinder/nfs_shares <<EOF
+172.16.26.11:/vol_NFS_CLOUD_EP_cinder1
+172.16.26.12:/vol_NFS_CLOUD_EP_cinder2
+EOF
+
 cat >/usr/local/lib/python2.7/dist-packages/cinder/db/sqlalchemy/migrate_repo/migrate.cfg <<EOF
 [db_settings]
 repository_id=cinder
