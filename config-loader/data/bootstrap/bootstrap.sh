@@ -15,9 +15,13 @@ do
         while read line
         do
 	        key=`echo $line | awk -F"=" '{print $1}'`
-	        value=`echo $line | awk -F"=" '{print $2}'`
-	
-	        curl -fs -X PUT "$ETCD/$key" -d value="$value"
+		value=`echo $line | awk -F"=" '{print $2}'`
+                echo "$key" | grep -i "general\|controller\|compute" >> /dev/null
+	        if [[ $? -eq 0 ]];then # If is a valid key, we put in our etcd
+		        curl -fs -X PUT "$ETCD/$key" -d value="$value"
+		else #If is another word that we dont want, we dont do nothin
+			break
+		fi
         done < $file
     done
 done

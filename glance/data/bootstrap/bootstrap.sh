@@ -5,6 +5,9 @@
 #############################
 source /bootstrap/configuration.sh
 source /bootstrap/environment.sh
+source /bootstrap/semaphore-dependencies.sh
+
+check_dependency "glance"
 
 #############################
 # variables and environment

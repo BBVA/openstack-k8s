@@ -1,9 +1,13 @@
-FROM ubuntu-base-os:v0.2
+FROM ubuntu-base-os:v0.3
 MAINTAINER BBVA Innovation <eurocloud-oneteam.group@bbva.com>
 
 
 ENV OPENSTACK_VERSION=mitaka \
     PBR=8.0.0
+    
+RUN     apt-get update && \
+        apt-get install -y nfs-common && \
+        rm -rf /var/lib/apt/lists/*
 
 
 RUN  set -ex; \
@@ -18,8 +22,9 @@ RUN  set -ex; \
      cp -r etc/cinder/ /etc/cinder/ ; \
      mv /etc/cinder/cinder.conf.sample /etc/cinder/cinder.conf; \
      mkdir -p /var/lib/cinder/nfs; \
-     pip install python-openstackclient
-
+     pip install python-openstackclient; \
+     pip uninstall kombu -y; \
+     pip install kombu==3.0.35
 
 ADD     data /
 
