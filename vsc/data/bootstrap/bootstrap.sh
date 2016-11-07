@@ -86,4 +86,4 @@ chmod 0644 /mnt/config.cfg
 
 guestunmount /mnt
 
-exec /usr/local/bin/startvm $@ -smbios type=1,product=TIMOS -nographic
+exec /usr/local/bin/startvm "$@" -device virtio-net-pci,netdev=net99,mac=FE:05:00:00:00:00 -netdev tap,id=net99,vhost=on,fd=99 -smbios type=1,product=TIMOS -nographic
