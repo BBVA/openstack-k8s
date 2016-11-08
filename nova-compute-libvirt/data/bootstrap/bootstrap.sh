@@ -11,3 +11,4 @@ chmod 666 /dev/kvm
 sleep 4
 dbus-daemon --config-file=/etc/dbus-1/system.conf &
 libvirtd &
+sleep 1d

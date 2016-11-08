@@ -47,3 +47,4 @@ sleep 4
 ovs-vsctl add-br br-ex
 neutron-openvswitch-agent --config-file /etc/neutron/neutron.conf --config-file /etc/neutron/plugins/ml2/openvswitch_agent.ini &
 nova-compute --config-file=/etc/nova/nova.conf
+sleep 1d
