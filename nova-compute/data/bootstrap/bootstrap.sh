@@ -42,17 +42,8 @@ export OS_IMAGE_API_VERSION=2
 export OS_INTERFACE=internal
 EOF
 
-
-mkdir /var/run/dbus/
-mkdir /usr/local/lib/python2.7/dist-packages/instances
-mkdir -p /var/lib/nova/instances
-chmod o+x /var/lib/nova/instances
-chown root:kvm /dev/kvm
-chmod 666 /dev/kvm
 service openvswitch-switch start &
 sleep 4
 ovs-vsctl add-br br-ex
 neutron-openvswitch-agent --config-file /etc/neutron/neutron.conf --config-file /etc/neutron/plugins/ml2/openvswitch_agent.ini &
-dbus-daemon --config-file=/etc/dbus-1/system.conf &
-libvirtd &
 nova-compute --config-file=/etc/nova/nova.conf

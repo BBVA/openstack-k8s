@@ -8,7 +8,7 @@ ENV OPENSTACK_VERSION=mitaka \
 
 # Install requriments and the main packages
 RUN     apt-get update && \
-        apt-get install -y qemu-kvm libvirt-bin dbus openvswitch-switch ipset python-libvirt && \
+        apt-get install -y openvswitch-switch ipset python-libvirt && \
         rm -rf /var/lib/apt/lists/*
 
 RUN    curl -fSL https://github.com/openstack/nova/archive/${novaPBR}.zip -o nova-${novaPBR}.zip \
