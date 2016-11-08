@@ -19,8 +19,8 @@ get_environment
 ############################
 # llamada a la funcion del configuration.sh
 re_write_file "/compute/nova/nova.conf" "/etc/nova/"
-re_write_file "/controller/neutron/neutron.conf" "/etc/neutron/"
-re_write_file "/controller/neutron/openvswitch_agent.ini" "/etc/neutron/plugins/ml2/"
+re_write_file "/compute/neutron/neutron.conf" "/etc/neutron/"
+re_write_file "/compute/neutron/openvswitch_agent.ini" "/etc/neutron/plugins/ml2/"
 
 sleep 3
 MI_IP=`ip a | grep 10.4 | awk '{print $2}' | cut -d"/" -f1`
