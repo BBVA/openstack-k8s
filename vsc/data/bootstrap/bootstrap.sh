@@ -48,6 +48,7 @@ getIP() {
         if [[ $configured_ip -gt $given_network && $configured_ip -lt $given_broadcast ]]; then
           IP=$(itoa $configured_ip)
           CIDR=$given_cidr
+          NETWORK=$(itoa $given_network)
         fi
       done
       [[ -z "$IP" ]] && echo "WARNING: SELECTED_NETWORK ($SELECTED_NETWORK) not found in $iface interface."
@@ -55,11 +56,14 @@ getIP() {
       IP=${IPs[0]}
     fi
   done
-  echo "$IP" "$CIDR"
+  echo "$IP" "$CIDR" "$NETWORK"
 }
 
-read MY_IP MY_CIDR < <(getIP)
-echo $MY_IP / $MY_CIDR
+read MY_IP MY_CIDR MY_NETWORK < <(getIP)
+echo $MY_IP / $MY_CIDR - $MY_NETWORK
+
+export FAKE_GW=$(itoa $( expr "$(atoi $MY_NETWORK)" + 1 ))
+echo "FAKE_GW=$FAKE_GW"
 
 # Get the local GW
 read _ _ MY_GW _ < <(ip route list match 0/0)
