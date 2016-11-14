@@ -41,8 +41,9 @@ RUN    curl -fSL https://github.com/openstack/horizon/archive/${PBR}.zip -o hori
     && rm -rf horizon-${PBR}*
 
 RUN	 apt-get -y update \
-     && dpkg -i  /Nuage-VSP/4.0R4/nuage-openstack-horizon_9.0.0-4.0.4-43_all.deb \
-     && rm -fr /Nuage-VSP
+     && dpkg -i  /nuage-VSP/4.0R4/nuage-openstack-horizon_9.0.0-4.0.4-43_all.deb ; exit 0 \
+     && apt-get -fy install \
+     && rm -fr /nuage-VSP
 
 RUN     chown root:root /bootstrap/*.sh && chmod a+x /bootstrap/*.sh
 

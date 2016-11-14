@@ -31,9 +31,9 @@ RUN    curl -fSL https://github.com/openstack/neutron/archive/${PBR}.zip -o neut
 ADD     data /
 
 RUN	apt-get -y update \
-     && dpkg -i  /Nuage-VSP/4.0R4/nuagenetlib_8.0.0-4.0.4-43_all.deb \
-                 /Nuage-VSP/4.0R4/nuage-openstack-neutron_8.0.0-4.0.4-43_all.deb \
-                 /Nuage-VSP/4.0R4/nuage-openstack-neutronclient_4.1.0-4.0.4-43_all.deb ; exit 0
+     && dpkg -i  /nuage-VSP/4.0R4/nuagenetlib_8.0.0-4.0.4-43_all.deb \
+                 /nuage-VSP/4.0R4/nuage-openstack-neutron_8.0.0-4.0.4-43_all.deb \
+                 /nuage-VSP/4.0R4/nuage-openstack-neutronclient_4.1.0-4.0.4-43_all.deb ; exit 0
 
 RUN  apt-get -fy install \
      && pip install configobj \
