@@ -33,6 +33,8 @@ RUN { \
 
 VOLUME /var/lib/mysql
 
+ADD     data /
+
 COPY my.cnf /etc/mysql/my.cnf
 COPY cluster.cnf /etc/mysql/conf.d/cluster.cnf
 
