@@ -1,4 +1,4 @@
-FROM    ubuntu-base-os:v0.2
+FROM bbvainnotech/ubuntu-base-os:latest
 MAINTAINER BBVA Innovation <eurocloud-oneteam.group@bbva.com>
 
 

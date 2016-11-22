@@ -1,4 +1,4 @@
-FROM    ubuntu-base-os:v0.3
+FROM bbvainnotech/ubuntu-base-os:latest
 MAINTAINER BBVA Innovation <eurocloud-oneteam.group@bbva.com>
 
 # Install requriments and the main packages

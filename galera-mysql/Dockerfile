@@ -1,4 +1,4 @@
-FROM ubuntu-base
+FROM bbvainnotech/ubuntu-base:latest
 MAINTAINER BBVA Innovation <eurocloud-oneteam.group@bbva.com>
 
 # add our user and group first to make sure their IDs get assigned

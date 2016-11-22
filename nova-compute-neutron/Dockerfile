@@ -1,4 +1,4 @@
-FROM    nova-compute-base:v0.1
+FROM bbvainnotech/k8s-nova-compute:latest
 MAINTAINER BBVA Innovation <eurocloud-oneteam.group@bbva.com>
 
 

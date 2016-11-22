@@ -1,4 +1,4 @@
-FROM ubuntu-base:v0.2
+FROM bbvainnotech/ubuntu-base:latest
 MAINTAINER BBVA Innovation <eurocloud-oneteam.group@bbva.com>
 
 ADD     data /
