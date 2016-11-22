@@ -113,9 +113,11 @@ if [ -n "$GALERA_CLUSTER" ]; then
 
   # set nodes own address
   #WSREP_NODE_ADDRESS=`ip addr show | grep -E '^[ ]*inet' | grep -m1 global | awk '{ print $2 }' | sed -e 's/\/.*//'`
+  
+
   #We filter SELECTED_NETWORK to find the first two octets. At the moment, this solution is provisional and only is valid for network /16
-  TWO_OCTECTS_IP= $(echo $SELECTED_NETWORK | awk -F '.' '{ print $1"."$2}')
-  echo $TWO_OCTECTS_IP
+  TWO_OCTECTS_IP=`echo $SELECTED_NETWORK | awk -F '.' '{ print $1"."$2}'`
+
   WSREP_NODE_ADDRESS=`ip addr show | grep -E '^[ ]*inet' | grep $TWO_OCTECTS_IP | awk '{ print $2 }' | sed -e 's/\/.*//'`
   if [ -n "$WSREP_NODE_ADDRESS" ]; then
     sed -i -e "s|^wsrep_node_address=.*$|wsrep_node_address=${WSREP_NODE_ADDRESS}|" /etc/mysql/conf.d/cluster.cnf
