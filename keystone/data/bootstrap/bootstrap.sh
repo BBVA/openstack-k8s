@@ -27,8 +27,12 @@ fix_configs $SQL_SCRIPT
 ############################
 
 mkdir /etc/keystone/fernet-keys
-echo "xRFeIEUineSD9EnHlraby90RAxIkekN_ZdGNhdZ2u3M=">/etc/keystone/fernet-keys/0
-echo "BLy_nPN2ekT0DrfFWOwxW6FpQUuu5FTrGb--cbdcPYo="
+chmod 0750 /etc/keystone/fernet-keys/
+
+keystone-manage fernet_setup --keystone-user root --keystone-group root
+
+#echo "xRFeIEUineSD9EnHlraby90RAxIkekN_ZdGNhdZ2u3M=">/etc/keystone/fernet-keys/0
+#echo "BLy_nPN2ekT0DrfFWOwxW6FpQUuu5FTrGb--cbdcPYo="
 
 if ! does_db_exist keystone; then
 
@@ -45,7 +49,7 @@ if ! does_db_exist keystone; then
     sleep 5
 
     # Initialize account
-    export $OS_TOKEN $OS_URL $OS_IDENTITY_API_VERSION
+    export $OS_TOKEN=$ADMIN_TOKEN
     openstack service create  --name keystone --description "Openstack Identity" identity
     openstack endpoint create --region $REGION identity public https://$KEYSTONE_OFUSCADO/v3
     openstack endpoint create --region $REGION identity internal http://$KEYSTONE_HOSTNAME:5000/v3
@@ -58,7 +62,7 @@ if ! does_db_exist keystone; then
     openstack role create user
     openstack role add --project admin --user admin admin
 
-    unset $OS_TOKEN $OS_URL
+    unset $OS_TOKEN
 fi
 
 #############################

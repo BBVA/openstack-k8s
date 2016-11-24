@@ -14,7 +14,7 @@ RUN    curl -fSL https://github.com/openstack/keystone/archive/${PBR}.zip -o key
     && pip install uwsgi \
     && cp -r etc /etc/keystone \
     && mv /etc/keystone/keystone.conf.sample /etc/keystone/keystone.conf \
-    && pip install git+https://github.com/openstack/python-openstackclient.git@stable/${OPENSTACK_VERSION} \
+    && pip install python-openstackclient \
     && cd - \
     && rm -rf keystone-${PBR}*
 
