@@ -3,7 +3,8 @@ MAINTAINER BBVA Innovation <eurocloud-oneteam.group@bbva.com>
 
 
 ENV OPENSTACK_VERSION=mitaka \
-    PBR=8.0.0
+    PBR=8.0.0 \
+    CLIENT=1.22.0
     
 RUN     apt-get update && \
         apt-get install -y nfs-common && \
@@ -22,7 +23,8 @@ RUN  set -ex; \
      cp -r etc/cinder/ /etc/cinder/ ; \
      mv /etc/cinder/cinder.conf.sample /etc/cinder/cinder.conf; \
      mkdir -p /var/lib/cinder/nfs; \
-     pip install python-openstackclient; \
+     pip install git+https://github.com/openstack/python-openstackclient.git@stable/${OPENSTACK_VERSION}; \
+     pip install os-client-config==${CLIENT}; \
      pip uninstall kombu -y; \
      pip install kombu==3.0.35
 

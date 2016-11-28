@@ -3,7 +3,8 @@ MAINTAINER BBVA Innovation <eurocloud-oneteam.group@bbva.com>
 
 
 ENV OPENSTACK_VERSION=mitaka \
-    PBR=6.0.0
+    PBR=6.0.0 \
+    CLIENT=1.22.0
 
 # Install requriments and the main packages
 
@@ -19,7 +20,8 @@ RUN    set -ex \
     && cp heat/cloudinit/config /usr/local/lib/python2.7/dist-packages/heat/cloudinit/ \
     && cp heat/cloudinit/boothook.sh /usr/local/lib/python2.7/dist-packages/heat/cloudinit/ \
     && chmod +x /usr/local/lib/python2.7/dist-packages/heat/cloudinit/boothook.sh \
-    && pip install python-openstackclient \
+    && pip install git+https://github.com/openstack/python-openstackclient.git@stable/${OPENSTACK_VERSION} \
+    && pip install os-client-config==${CLIENT} \
     && cd - \
     && rm -rf heat-${PBR}*
 

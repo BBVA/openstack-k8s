@@ -3,7 +3,8 @@ MAINTAINER BBVA Innovation <eurocloud-oneteam.group@bbva.com>
 
 
 ENV OPENSTACK_VERSION=mitaka \
-    PBR=8.1.2
+    PBR=8.1.2 \
+    CLIENT=1.22.0
 
 RUN     apt-get update && \
         apt-get install -y openvswitch-switch iptables dnsmasq dnsmasq-utils arping && \
@@ -23,7 +24,8 @@ RUN    curl -fSL https://github.com/openstack/neutron/archive/${PBR}.zip -o neut
     && mv /etc/neutron/metadata_agent.ini.sample /etc/neutron/metadata_agent.ini \
     && mv /etc/neutron/plugins/ml2/ml2_conf.ini.sample /etc/neutron/plugins/ml2/ml2_conf.ini \
     && mv /etc/neutron/plugins/ml2/openvswitch_agent.ini.sample /etc/neutron/plugins/ml2/openvswitch_agent.ini \
-    && pip install python-openstackclient \
+    && pip install git+https://github.com/openstack/python-openstackclient.git@stable/${OPENSTACK_VERSION} \
+    && pip install os-client-config==${CLIENT} \
     && cd - \
     && rm -rf neutron-${PBR}*
 

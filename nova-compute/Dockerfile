@@ -3,7 +3,8 @@ MAINTAINER BBVA Innovation <eurocloud-oneteam.group@bbva.com>
 
 
 ENV OPENSTACK_VERSION=mitaka \
-    novaPBR=13.1.0
+    novaPBR=13.1.0 \
+    CLIENT=1.22.0
 
 # Install requriments and the main packages
 RUN     apt-get update && \
@@ -19,7 +20,8 @@ RUN    curl -fSL https://github.com/openstack/nova/archive/${novaPBR}.zip -o nov
     && cp -r etc /etc/nova \
     && mv /etc/nova/nova/* /etc/nova/ \
     && mv /etc/nova/nova.conf.sample /etc/nova/nova.conf \
-    && pip install python-openstackclient \
+    && pip install git+https://github.com/openstack/python-openstackclient.git@stable/${OPENSTACK_VERSION} \
+    && pip install os-client-config==${CLIENT} \
     && cd - \
     && rm -rf nova-${novaPBR}*
 

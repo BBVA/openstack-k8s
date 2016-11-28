@@ -3,7 +3,8 @@ MAINTAINER BBVA Innovation <eurocloud-oneteam.group@bbva.com>
 
 
 ENV OPENSTACK_VERSION=mitaka \
-    PBR=9.1.0
+    PBR=9.1.0 \
+    CLIENT=1.22.0
 
 # Install requriments and the main packages
 RUN     apt-get update && \
@@ -34,7 +35,8 @@ RUN    curl -fSL https://github.com/openstack/horizon/archive/${PBR}.zip -o hori
     && ln -s /etc/openstack-dashboard/ /usr/share/openstack-dashboard/openstack_dashboard/conf \
     && cd /usr/local/lib/python2.7/dist-packages/horizon \
     && python /usr/share/openstack-dashboard/manage.py compilemessages \
-    && pip install python-openstackclient \
+    && pip install git+https://github.com/openstack/python-openstackclient.git@stable/${OPENSTACK_VERSION} \
+    && pip install os-client-config==${CLIENT} \
     && mkdir /etc/apache2/run \
     && chown www-data:www-data /etc/apache2/run \
     && chown -R www-data:www-data /usr/share/openstack-dashboard/* \

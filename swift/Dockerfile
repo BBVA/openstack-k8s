@@ -3,7 +3,8 @@ MAINTAINER BBVA Innovation <eurocloud-oneteam.group@bbva.com>
 
 
 ENV OPENSTACK_VERSION=mitaka \
-    PBR=2.7.0
+    PBR=2.7.0 \
+    CLIENT=1.22.0
 
 # Install requriments and the main packages
 RUN     apt-get update && \
@@ -35,7 +36,8 @@ RUN    set -ex \
     && mv /etc/swift/container-server.conf-sample /etc/swift/container-server.conf \
     && mv /etc/swift/object-server.conf-sample /etc/swift/object-server.conf \
     && mv /etc/swift/account-server.conf-sample /etc/swift/account-server.conf \
-    && pip install python-openstackclient \
+    && pip install git+https://github.com/openstack/python-openstackclient.git@stable/${OPENSTACK_VERSION} \
+    && pip install os-client-config==${CLIENT} \
     && cd - \
     && rm -rf swift-${PBR}*
 
