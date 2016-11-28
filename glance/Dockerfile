@@ -1,9 +1,9 @@
 FROM bbvainnotech/ubuntu-base-os:latest
 MAINTAINER BBVA Innovation <eurocloud-oneteam.group@bbva.com>
 
-
 ENV OPENSTACK_VERSION=mitaka \
-    PBR=12.0.0
+    PBR=12.0.0 \
+    CLIENT=1.22.0
 
 # Install requriments and the main packages
 
@@ -14,7 +14,8 @@ RUN    set -ex \
     && pip install -r requirements.txt \
     && PBR_VERSION=${PBR}  pip install . \
     && cp -r etc /etc/glance \
-    && pip install python-openstackclient \
+    && pip install git+https://github.com/openstack/python-openstackclient.git@stable/${OPENSTACK_VERSION} \
+    && pip install os-client-config==${CLIENT} \
     && cd - \
     && rm -rf glance-${PBR}*
 
