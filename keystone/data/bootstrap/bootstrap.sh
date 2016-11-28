@@ -29,10 +29,8 @@ fix_configs $SQL_SCRIPT
 mkdir /etc/keystone/fernet-keys
 chmod 0750 /etc/keystone/fernet-keys/
 
-keystone-manage fernet_setup --keystone-user root --keystone-group root
+echo "xRFeIEUineSD9EnHlraby90RAxIkekN_ZdGNhdZ2u3M=">/etc/keystone/fernet-keys/0
 
-#echo "xRFeIEUineSD9EnHlraby90RAxIkekN_ZdGNhdZ2u3M=">/etc/keystone/fernet-keys/0
-#echo "BLy_nPN2ekT0DrfFWOwxW6FpQUuu5FTrGb--cbdcPYo="
 
 if ! does_db_exist keystone; then
 

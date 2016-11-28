@@ -2,7 +2,8 @@ FROM bbvainnotech/ubuntu-base-os:latest
 MAINTAINER BBVA Innovation <eurocloud-oneteam.group@bbva.com>
 
 ENV OPENSTACK_VERSION=mitaka \
-    PBR=9.0.1 
+    PBR=9.0.1 \
+    CLIENT=1.22.0
 
 # Install requriments and the main packages
 
@@ -14,7 +15,8 @@ RUN    curl -fSL https://github.com/openstack/keystone/archive/${PBR}.zip -o key
     && pip install uwsgi \
     && cp -r etc /etc/keystone \
     && mv /etc/keystone/keystone.conf.sample /etc/keystone/keystone.conf \
-    && pip install python-openstackclient \
+    && pip install git+https://github.com/openstack/python-openstackclient.git@stable/${OPENSTACK_VERSION} \
+    && pip install os-client-config==${CLIENT} \
     && cd - \
     && rm -rf keystone-${PBR}*
 
